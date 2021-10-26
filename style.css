@@ -1,0 +1,163 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+.wrap {
+    height: 100vh;
+    display: flex;
+    justify-content: space-around;
+    padding-top: 5rem;
+    margin: 0 auto;
+    max-width: 800px;
+}
+
+.settings {
+    border-right: 1px dashed #ccc;
+    width: 350px;
+}
+
+.settings h2 {
+    margin-bottom: 1rem;
+}
+
+.settings ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 1rem;
+}
+
+.container {
+    position: relative;
+    width: 300px;
+    min-width: 300px;
+}
+
+.input-box {
+    text-align: left;
+    cursor: pointer;
+    width: 100%;
+    padding-bottom: 5px;
+    height: 30px;
+    border-bottom: dimgrey 1px solid;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.input-label {
+    white-space: nowrap;
+    text-align: left;
+    font-size: 16px;
+    transition: all 200ms ease-in-out;
+
+    flex: 2 1 80%;
+}
+
+.input-label-shrink {
+    transform-origin: 0 0;
+    position: relative;
+    transform: scale(.8) translateY(-15px);
+    color: dimgrey;
+}
+
+.input-arrow-wrapper {
+    min-width: 20px;
+    flex: 2 1 20%;
+    display: flex;
+    justify-content: end;
+}
+
+.input-arrow {
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+
+    border-bottom: 5px solid black;
+
+    transition: all 200ms ease-in-out;
+}
+
+
+.arrow-up {
+    transform: rotate(0deg);
+}
+
+.arrow-down {
+    transform: rotate(-180deg);
+}
+
+.dropdown-box{
+    z-index: 2400;
+    display: block;
+    top: 40px;
+    width: 100%;
+    position: absolute;
+    max-height: 150px;
+    white-space: nowrap;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+
+    background: white;
+    transition: all 100ms ease-in-out;
+    transform: scale(1);
+}
+
+.dropdown-box-hide{
+    transform: scale(0);
+    position: absolute;
+}
+
+.dropdown-box::-webkit-scrollbar{
+    display: none;
+}
+
+.option{
+    font-size: 17px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.option:hover{
+    background: rgba(135, 135, 135, 0.16);
+}
+
+.loader{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    background: rgba(105, 105, 105, 0.4);
+    border-radius: 50px;
+
+    margin: 0 auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.circle-loader{
+    animation-name: loading;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+
+    width: 40px;
+    height: 10px;
+    background: white;
+}
+
+@keyframes loading {
+    from {
+        transform: rotate(360deg);
+    }
+}
+
+
+
+

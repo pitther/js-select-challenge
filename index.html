@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons' rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title>Dropdown</title>
+</head>
+<body>
+<div class="wrap">
+    <div class="settings">
+        <h2>Действия</h2>
+        <ul id="actions">
+            <li>
+                <button data-type="open" onclick="select.open()">Открыть</button>
+            </li>
+            <li>
+                <button data-type="close" onclick="select.close()">Закрыть</button>
+            </li>
+            <li>
+                <button data-type="set" onclick="select.chooseIndex(5)">Выбрать 5 индекс</button>
+            </li>
+            <li>
+                <button data-type="get" onclick="select.getCurrent()">Получить выбранный</button>
+            </li>
+            <li>
+                <button data-type="clear" onclick="select.clear()">Очистить</button>
+            </li>
+            <li>
+                <button data-type="destroy" onclick="select.destroy()">Уничтожить</button>
+            </li>
+        </ul>
+
+        <p id="log"></p>
+    </div>
+
+    <div id="select">
+        <div id="parent"></div>
+    </div>
+
+</div>
+
+<script src="index.js"/>
+</body>
+</html>
