@@ -4,8 +4,8 @@ class Select {
         this.isOpen = false;
         this.label = label;
         this.choosedIndex = -1;
+        this.onSelect = onSelect;
     }
-
     #create = (selector, label, url) => {
         if (selector.startsWith('#')) {
             this.parent = document.getElementById(selector.slice(1));
@@ -140,7 +140,6 @@ class Select {
         if (!this.isOpen) this.open();
         else this.close();
     }
-
     open = () => {
         if (this.isOpen) return;
 
@@ -164,8 +163,9 @@ class Select {
     chooseIndex = (index) => {
         if (this.options[index]){
             this.choosedIndex = index;
-            this.#updateLabel(this.options[index])
+            this.#updateLabel(this.options[index]);
             this.close();
+            this.onSelect([this.choosedIndex,this.options[index]]);
             return [this.choosedIndex,this.options[index]]
         } else {
             return undefined;
@@ -191,5 +191,6 @@ const select = new Select({
     label: 'Выберите технологию',
     url: 'https://api.npoint.io/5c1750e2d62a51de3b86',
     onSelect(selectedItem) {
+        console.log('Selected: ',selectedItem);
     }
 })
