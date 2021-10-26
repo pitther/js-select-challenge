@@ -123,8 +123,6 @@ class Select {
         this.inputLabelComponent.innerHTML = label;
     }
     #setData = (data) => {
-
-
         if (!data || !data.labels) {
             console.error('No data');
             return;
@@ -134,8 +132,6 @@ class Select {
         this.#updateOptions();
 
         this.#loader(false);
-
-
     }
     #getData = async (url) => {
         if (!url) {
