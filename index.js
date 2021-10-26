@@ -1,11 +1,35 @@
 class Select {
+    dropdownBoxComponent;
+    containerComponent;
+    inputBoxComponent;
+    parent;
+    inputLabelComponent;
+    inputArrowWrapper;
+    inputArrowComponent;
+    loaderComponent;
+    options;
+    loaderCircleComponent;
+    selectedIndex;
+    isOpen;
+    label;
+    onSelect;
+
+
     constructor({selector, label, url, onSelect}) {
-        this.#create(selector, label, url);
+        if (!selector) console.error('Selector not provided');
+        if (!label) console.error('Label not provided');
+        if (!url) console.error('Url not provided');
+
         this.isOpen = false;
+
         this.label = label;
-        this.choosedIndex = -1;
+        this.selectedIndex = -1;
         this.onSelect = onSelect;
+
+        this.#create(selector, label, url);
+
     }
+
     #create = (selector, label, url) => {
         if (selector.startsWith('#')) {
             this.parent = document.getElementById(selector.slice(1));
@@ -17,7 +41,7 @@ class Select {
             console.error('Cannot find element with this selector');
             return;
         }
-        ;
+
 
         //container component
         this.containerComponent = document.createElement('div');
@@ -59,10 +83,13 @@ class Select {
         //adding container to parent
         this.parent.appendChild(this.containerComponent);
 
-        this.#setData(url);
+        ///
+        this.#loader(true);
+        this.#getData(url).then(data => this.#setData(data));
+
     }
     #loader = (enable) => {
-        if (enable){
+        if (enable) {
             this.loaderComponent = document.createElement('div');
             this.loaderCircleComponent = document.createElement('div');
             this.loaderComponent.className = 'loader';
@@ -74,13 +101,12 @@ class Select {
         }
 
         this.dropdownBoxComponent.removeChild(this.loaderComponent);
-        return;
     }
     #updateOptions = () => {
         const component = this.dropdownBoxComponent;
         if (!this.options.length) {
             const dropdownBox = this.dropdownBoxComponent;
-            while(dropdownBox.lastElementChild){
+            while (dropdownBox.lastElementChild) {
                 dropdownBox.removeChild((dropdownBox.lastElementChild));
             }
             return;
@@ -89,16 +115,16 @@ class Select {
             const option = document.createElement('div');
             option.className = 'option';
             option.innerHTML = label;
-            option.onclick = (event) => this.chooseIndex(index);
+            option.onclick = () => this.chooseIndex(index);
             component.appendChild(option);
         })
     }
     #updateLabel = (label) => {
         this.inputLabelComponent.innerHTML = label;
     }
-    #setData = async (url) => {
-        this.#loader(true);
-        const data = await this.#getData(url);
+    #setData = (data) => {
+
+
         if (!data || !data.labels) {
             console.error('No data');
             return;
@@ -108,6 +134,8 @@ class Select {
         this.#updateOptions();
 
         this.#loader(false);
+
+
     }
     #getData = async (url) => {
         if (!url) {
@@ -117,7 +145,7 @@ class Select {
         const data = await fetch(url, {
             method: 'GET',
             mode: 'cors',
-            headers:{
+            headers: {
                 'Access-Control-Allow-Origin': '*',
                 'Access-Control-Allow-Headers': '*'
             }
@@ -161,23 +189,24 @@ class Select {
         this.isOpen = false;
     }
     chooseIndex = (index) => {
-        if (this.options[index]){
-            this.choosedIndex = index;
+        if (this.options[index]) {
+            this.selectedIndex = index;
             this.#updateLabel(this.options[index]);
             this.close();
-            this.onSelect([this.choosedIndex,this.options[index]]);
-            return [this.choosedIndex,this.options[index]]
+            if (this.onSelect)
+                this.onSelect([this.selectedIndex, this.options[index]]);
+            return [this.selectedIndex, this.options[index]]
         } else {
             return undefined;
         }
     }
     getCurrent = () => {
-        if (this.options[this.choosedIndex]) return [this.choosedIndex, this.options[this.choosedIndex]];
-        return [this.choosedIndex];
+        if (this.options[this.selectedIndex]) return [this.selectedIndex, this.options[this.selectedIndex]];
+        return [this.selectedIndex];
     }
     clear = () => {
         this.options = [];
-        this.choosedIndex = -1;
+        this.selectedIndex = -1;
         this.#updateOptions();
         this.#updateLabel(this.label);
     }
@@ -191,6 +220,6 @@ const select = new Select({
     label: 'Выберите технологию',
     url: 'https://api.npoint.io/5c1750e2d62a51de3b86',
     onSelect(selectedItem) {
-        console.log('Selected: ',selectedItem);
+        console.log('Selected: ', selectedItem);
     }
 })
