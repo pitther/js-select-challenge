@@ -15,24 +15,22 @@
         <h2>Действия</h2>
         <ul id="actions">
             <li>
-                <button data-type="open" onclick="select.open()">Открыть</button>
+                <button data-type="open">Открыть</button>
             </li>
             <li>
-                <button data-type="close" onclick="select.close()">Закрыть</button>
+                <button data-type="close">Закрыть</button>
             </li>
             <li>
-                <button data-type="set" onclick="select.chooseIndex(5)">Выбрать 5 индекс</button>
+                <button data-type="set">Выбрать 5 индекс</button>
             </li>
             <li>
-                <button data-type="get" onclick="this.innerHTML='Получить выбранный: '+select.getCurrent()">Получить
-                    выбранный
-                </button>
+                <button data-type="get">Получить выбранный</button>
             </li>
             <li>
-                <button data-type="clear" onclick="select.clear()">Очистить</button>
+                <button data-type="clear">Очистить</button>
             </li>
             <li>
-                <button data-type="destroy" onclick="select.destroy()">Уничтожить</button>
+                <button data-type="destroy">Уничтожить</button>
             </li>
         </ul>
 
@@ -43,7 +41,7 @@
         <div id="parent"></div>
     </div>
 </div>
-
-<script src="index.js"></script>
+<script type="module" src="select.js"></script>
+<script type="module" src="index.js"></script>
 </body>
 </html>
